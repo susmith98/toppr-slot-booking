@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -11,109 +8,31 @@ from selenium.common.exceptions import NoSuchElementException,WebDriverException
 import time
 import os
 
-
-# In[4]:
-
-
+## Loading the chrome driver
 driver=webdriver.Chrome(executable_path=os.path.join(r'E:\General','chromedriver.exe'))
-#driver=webdriver.Firefox(executable_path=os.path.join(r'E:\General','geckodriver.exe'))
-
-
-# In[3]:
-
 
 ## NAvigate to Toppr Login Page
 driver.get('https://community.toppr.com/')
 
-
-# In[35]:
-
-
 ## Finding and clicking on Login button
 login_ele=driver.find_element_by_xpath('//*[@id="app"]/div/div/div[1]/div/div[1]/div[2]/button[1]')
 
-
-# In[36]:
-
-
 login_ele.click()
-
-
-# In[37]:
-
 
 email_ele=driver.find_element_by_id('email-login')
 
-
-# In[38]:
-
-
 pwd_ele=driver.find_element_by_id('password-login')
-
-
-# In[39]:
-
 
 email_ele.send_keys('<<Email>>')
 
-
-# In[40]:
-
-
 pwd_ele.send_keys('<<Password>>')
-
-
-# In[41]:
-
 
 login_ele=driver.find_element_by_xpath('//*[@id="login_modal_form"]/button[2]')
 
-
-# In[42]:
-
-
 login_ele.click()
-
-
-# In[43]:
-
 
 ## Navigating to Slots page 
 driver.get('https://community.toppr.com/doubts/slots/')
-
-
-# In[13]:
-
-
-l=driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]')
-
-
-# In[14]:
-
-
-L=l.find_elements_by_css_selector('*')
-
-
-# In[19]:
-
-
-L[9].click()
-
-
-# In[57]:
-
-
-last_ele=driver.find_element_by_xpath('//*[@id="2019-03-21"]')
-
-
-# In[58]:
-
-
-last_ele.click()
-
-
-# In[59]:
-
 
 ## Storing the selectors of each time slot element on screen i.e 3pm, 4pm, 5pm....
 ## Included only 3-7PM slots selector is because, I'm only interested to book those slots
@@ -125,10 +44,6 @@ Seven='//*[@id="root"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div
 Sixpm='//*[@id="root"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div/div[3]/div'
 Sevenpm='//*[@id="root"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div[4]/div/div[4]/div'
 Slots=[Three,Four,Five,Six,Seven,Sixpm,Sevenpm]
-
-
-# In[60]:
-
 
 def Book():
     for i in Slots:
@@ -152,9 +67,6 @@ def Book():
         return False
 
 
-# In[3]:
-
-
 ## RUnning the script with the time gap of 5 seconds which would terminate when a slot is booked successfully
 while True:
     isBooked = Book()
@@ -162,23 +74,6 @@ while True:
         break
     ## Wait for 5 seconds
     time.sleep(5)
-
-
-# In[36]:
-
-
-now = datetime.datetime.now()
-print(now.minute)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
 
 
 
